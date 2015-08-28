@@ -29,7 +29,7 @@ def extract_rides(soup_raw, form_id):
         columns = list(row.find_all("td"))
         if len(columns) < 5:
             return []
-        print(columns)
+
         rides.append({"date": next(columns[1].strings),
                       "ride_type": next(columns[2].strings),
                       "available_seats": int(next(columns[3].strings)),
@@ -68,7 +68,7 @@ def teletiquete_rides(from_city, to_city, depart_date, return_date, round_trip=F
                                 "html.parser")
 
     result["departures"] = extract_rides(soup_depart, "frmOpIda")
-    print(result["departures"])
+
 
     if round_trip:
         soup_return = BeautifulSoup("%s" % response.find("cmd", attrs={"t": "divResultadoRegreso"}).contents[0])
